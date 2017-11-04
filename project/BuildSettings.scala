@@ -36,8 +36,8 @@ object BuildSettings {
       "-Ywarn-numeric-widen",
       "-Ywarn-value-discard",
       "-Xfuture",
-      "-Ywarn-unused-import",
-      "-Xfatal-warnings"
+      "-Ywarn-unused-import"
+//      "-Xfatal-warnings"
     ),
     resolvers ++= Seq(
       "Ficus Bintray" at "https://dl.bintray.com/iheartradio/maven/",
