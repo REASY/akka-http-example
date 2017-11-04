@@ -1,18 +1,18 @@
 package http.routes
 
-import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
 import services.Searching
 import store.SearchStorage
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 class SearchRoute(
                    searching: Searching,
                    searchStorage: SearchStorage
                  )(implicit executionContext: ExecutionContext) extends PlayJsonSupport {
+
 
   val route: Route = pathPrefix("search") {
     (pathEndOrSingleSlash & get) {

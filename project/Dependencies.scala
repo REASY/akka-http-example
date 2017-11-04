@@ -11,6 +11,7 @@ object Dependencies {
     val mockitoCore = "2.8.47"
     val akkaHttpPlayJson = "1.19.0-M2"
     val playJson = "2.6.6"
+    val playWs = "1.1.3"
   }
 
   val commonsDependencies = Seq(
@@ -23,10 +24,11 @@ object Dependencies {
     "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
       exclude("com.typesafe.scala-logging", "scala-logging-api_2.11")
       exclude("com.typesafe.scala-logging", "scala-logging-slf4j_2.11"),
-    "ch.qos.logback" % "logback-classic" % Versions.logback,
+    "ch.qos.logback" % "logback-classic" % Versions.logback % "test,it",
     "org.scalatest" %% "scalatest" % Versions.scalaTest % "test,it",
     "de.heikoseeberger" %% "akka-http-play-json" % Versions.akkaHttpPlayJson,
     "org.mockito" % "mockito-core" % Versions.mockitoCore % "test,it",
     "com.typesafe.play" %% "play-json" % Versions.playJson,
+    "com.typesafe.play" %% "play-ahc-ws-standalone" % Versions.playWs
   )
 }
