@@ -7,9 +7,11 @@ import org.scalatest.Matchers._
 import org.scalatest.{AsyncFunSuite, BeforeAndAfterAll}
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 
+import scala.util.Try
+
 class GoogleSearchingTest extends AsyncFunSuite with BeforeAndAfterAll {
-  val config = GoogleSearchingConfig("AIzaSyANcx4iIldg0ZRrDrPbWBUgnGUl76Onau8",
-    "004881717601273209752:o6ec1aj_gze")
+  val config = GoogleSearchingConfig("https://www.googleapis.com/customsearch/v1",
+    "AIzaSyANcx4iIldg0ZRrDrPbWBUgnGUl76Onau8", "004881717601273209752:o6ec1aj_gze")
 
   implicit val actorSystem: ActorSystem = ActorSystem()
   implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
@@ -20,8 +22,8 @@ class GoogleSearchingTest extends AsyncFunSuite with BeforeAndAfterAll {
   }
 
   override def afterAll(): Unit = {
-    ws.close()
-    actorMaterializer.shutdown()
+    Try(ws.close())
+    Try(actorMaterializer.shutdown())
     actorSystem.terminate()
   }
 

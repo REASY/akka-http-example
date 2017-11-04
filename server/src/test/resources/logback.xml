@@ -8,14 +8,6 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>dummy-googler.log</file>
-        <append>false</append>
-        <encoder>
-            <pattern>%date{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
-
     <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="CONSOLE" />
     </appender>
@@ -23,10 +15,8 @@
     <logger name="slick" level="INFO" />
     <logger name="com.zaxxer.hikari" level="INFO" />
     <logger name="akka.io" level="INFO" />
-    <logger name="play.shaded.ahc" level="INFO" />
 
     <root level="DEBUG">
         <appender-ref ref="ASYNC_CONSOLE"/>
-        <appender-ref ref="FILE"/>
     </root>
 </configuration>

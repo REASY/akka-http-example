@@ -5,7 +5,7 @@ object Dependencies {
     val akkaHttp = "10.0.10"
     val scalaTest = "3.0.4"
     val slick = "3.2.1"
-    val scalaLogging = "3.5.0"
+    val scalaLogging = "3.7.2"
     val config = "1.3.1"
     val logback = "1.2.3"
     val mockitoCore = "2.8.47"
@@ -21,10 +21,8 @@ object Dependencies {
     "com.typesafe.slick" %% "slick" % Versions.slick,
     "com.typesafe.slick" %% "slick-hikaricp" % Versions.slick,
     "com.typesafe" % "config" % Versions.config,
-    "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging
-      exclude("com.typesafe.scala-logging", "scala-logging-api_2.11")
-      exclude("com.typesafe.scala-logging", "scala-logging-slf4j_2.11"),
-    "ch.qos.logback" % "logback-classic" % Versions.logback % "test,it",
+    "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging,
+    "ch.qos.logback" % "logback-classic" % Versions.logback,
     "org.scalatest" %% "scalatest" % Versions.scalaTest % "test,it",
     "de.heikoseeberger" %% "akka-http-play-json" % Versions.akkaHttpPlayJson,
     "org.mockito" % "mockito-core" % Versions.mockitoCore % "test,it",

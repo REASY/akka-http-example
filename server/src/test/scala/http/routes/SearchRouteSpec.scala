@@ -5,12 +5,12 @@ import models.SearchResult
 import org.mockito.ArgumentMatchers._
 import org.mockito.Mockito._
 import services.Searching
-import store.SearchStorage
+import storage.SearchStorage
 import utils.RouteTestEx
 
 import scala.concurrent.Future
 
-class SearchRouteTest extends RouteTestEx {
+class SearchRouteSpec extends RouteTestEx {
 
   "SearchRoute" when {
     "GET /search?q=hi" should {

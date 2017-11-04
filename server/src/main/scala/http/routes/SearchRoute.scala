@@ -4,7 +4,7 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import de.heikoseeberger.akkahttpplayjson.PlayJsonSupport
 import services.Searching
-import store.SearchStorage
+import storage.SearchStorage
 
 import scala.concurrent.ExecutionContext
 
@@ -19,6 +19,7 @@ class SearchRoute(
       parameters('q.as[String].?) {
         case Some(q) =>
           // QUESTION: What should we do if could not write SearchResult to storage?
+
           // QUESTION: Should we return result to client just after getting it from search engine
           // or only after inserting to storage ?
 
