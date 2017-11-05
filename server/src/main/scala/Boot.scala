@@ -9,14 +9,16 @@ import models.{GoogleSearchingConfig, ServerConfig}
 import play.api.libs.ws.StandaloneWSClient
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import services.{GoogleSearching, Searching}
-import storage.{InMemorySearchStorage, SearchStorage}
+import slick.basic.DatabaseConfig
+import slick.jdbc.JdbcProfile
+import storage.{DbSearchStorage, InMemorySearchStorage, SearchStorage}
 import utils.CustomExceptionHandling
 
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success, Try}
 
 object Boot extends LazyLogging {
-  implicit val actorSystem = ActorSystem()
+  implicit val actorSystem: ActorSystem = ActorSystem()
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executor: ExecutionContext = actorSystem.dispatcher
 
@@ -39,10 +41,13 @@ object Boot extends LazyLogging {
       val googleSearchingConfig = GoogleSearchingConfig(config.getConfig("google-searching-config"))
       logger.info(s"GoogleSearchingConfig: $googleSearchingConfig")
 
-      val searching: Searching = new GoogleSearching(googleSearchingConfig, ws)
-      val store: SearchStorage = new InMemorySearchStorage()
+      val dbConfig: DatabaseConfig[JdbcProfile] =
+        DatabaseConfig.forConfig[JdbcProfile]("database", config)
 
-      val searchRoute = new SearchRoute(searching, store)
+      val searching: Searching = new GoogleSearching(googleSearchingConfig, ws)
+      val storage: SearchStorage = new DbSearchStorage(dbConfig)
+
+      val searchRoute = new SearchRoute(searching, storage)
 
       val boostedRoute = handleExceptions(CustomExceptionHandling.handler)(searchRoute.route)
 

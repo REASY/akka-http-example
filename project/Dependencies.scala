@@ -12,6 +12,8 @@ object Dependencies {
     val akkaHttpPlayJson = "1.19.0-M2"
     val playJson = "2.6.6"
     val playWs = "1.1.3"
+    val h2Database = "1.4.196"
+    val jtds = "1.3.1"
   }
 
   val commonsDependencies = Seq(
@@ -27,6 +29,8 @@ object Dependencies {
     "de.heikoseeberger" %% "akka-http-play-json" % Versions.akkaHttpPlayJson,
     "org.mockito" % "mockito-core" % Versions.mockitoCore % "test,it",
     "com.typesafe.play" %% "play-json" % Versions.playJson,
-    "com.typesafe.play" %% "play-ahc-ws-standalone" % Versions.playWs
+    "com.typesafe.play" %% "play-ahc-ws-standalone" % Versions.playWs,
+    "com.h2database" % "h2" % Versions.h2Database % "test,it",
+    "net.sourceforge.jtds" % "jtds" % Versions.jtds,
   )
 }

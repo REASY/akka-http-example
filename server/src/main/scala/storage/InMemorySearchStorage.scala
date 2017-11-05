@@ -9,9 +9,12 @@ class InMemorySearchStorage extends SearchStorage {
   private val searchResults: ConcurrentLinkedQueue[SearchResult] =
     new ConcurrentLinkedQueue[SearchResult]()
 
-  def add(sr: SearchResult): Future[Boolean] = Future.successful(searchResults.add(sr))
+  def add(sr: SearchResult): Future[Long] = Future.successful( {
+    searchResults.add(sr)
+    1
+  })
 
-  def getAll(): Future[Seq[SearchResult]] = {
+  def getAll: Future[Seq[SearchResult]] = {
     Future.successful(searchResults.toArray(Array.ofDim[SearchResult](0)))
   }
 }

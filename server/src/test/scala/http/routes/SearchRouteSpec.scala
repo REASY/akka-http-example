@@ -19,7 +19,7 @@ class SearchRouteSpec extends RouteTestEx {
           .thenReturn(Future.successful(searchResult1))
 
         when(storage.add(any[SearchResult]))
-          .thenReturn(Future.successful(true))
+          .thenReturn(Future.successful(1L))
 
         Get("/search?q=hi") ~> searchRoute ~> check {
           status.intValue() shouldBe 200
