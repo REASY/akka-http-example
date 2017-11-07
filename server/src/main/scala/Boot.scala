@@ -45,6 +45,7 @@ object Boot extends LazyLogging {
         DatabaseConfig.forConfig[JdbcProfile]("database", config)
 
       val searching: Searching = new GoogleSearching(googleSearchingConfig, ws)
+      // TODO Use separate execuiton context for DbSearchStorage (JDBC driver is not async, but blocking)
       val storage: SearchStorage = new DbSearchStorage(dbConfig)
 
       val searchRoute = new SearchRoute(searching, storage)
